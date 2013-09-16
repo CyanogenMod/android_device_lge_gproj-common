@@ -149,9 +149,6 @@ on post-fs-data
     mkdir /data/misc/tzapps
     restorecon /data/misc/tzapps
 
-    write /dev/wcnss_wlan 1
-    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
-
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
