@@ -210,7 +210,7 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
             Log.d(LOG_TAG, "This is a GSM PHONE " + appIndex);
         }
 
-        if (numApplications > 0) {
+        if (numApplications > 0 && appIndex > -1) {
             IccCardApplicationStatus application = status.mApplications[appIndex];
             mAid = application.aid;
             mUSIM = application.app_type
