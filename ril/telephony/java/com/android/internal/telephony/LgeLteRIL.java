@@ -618,23 +618,24 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
     setupDataCall(String radioTechnology, String profile, String apn,
             String user, String password, String authType, String protocol,
             Message result) {
+        // Only update VSS if we have an actual APN
+        if(apn != null && !apn.isEmpty()) {
+                RILRequest rrSPT = RILRequest.obtain(
+                        0x16f, null); //121 - RIL_REQUEST_VSS_UPDATE_PROFILE
 
-        RILRequest rrSPT = RILRequest.obtain(
-                0x16f, null); //121 - RIL_REQUEST_VSS_UPDATE_PROFILE
-        rrSPT.mParcel.writeInt(1); // pdnId
-        rrSPT.mParcel.writeInt(apn.length()); // apnLength
-        rrSPT.mParcel.writeString(apn); // apn
-        rrSPT.mParcel.writeInt(0); // ipType
-        rrSPT.mParcel.writeInt(0); // inactivityTime
-        rrSPT.mParcel.writeInt(1); // enable
-        rrSPT.mParcel.writeInt(0); // authType
-        rrSPT.mParcel.writeInt(0); // esmInfo
-        rrSPT.mParcel.writeString(""); // username
-        rrSPT.mParcel.writeString(""); // password
-        send(rrSPT);
-
-
-        super.setupDataCall(radioTechnology, profile, apn, user, password, 
-                            authType, protocol, result);
+                rrSPT.mParcel.writeInt(1); // pdnId
+                rrSPT.mParcel.writeInt(apn.length()); // apnLength
+                rrSPT.mParcel.writeString(apn); // apn
+                rrSPT.mParcel.writeInt(0); // ipType
+                rrSPT.mParcel.writeInt(0); // inactivityTime
+                rrSPT.mParcel.writeInt(1); // enable
+                rrSPT.mParcel.writeInt(0); // authType
+                rrSPT.mParcel.writeInt(0); // esmInfo
+                rrSPT.mParcel.writeString(""); // username
+                rrSPT.mParcel.writeString(""); // password
+                send(rrSPT);
+	}
+                super.setupDataCall(radioTechnology, profile, apn, user, password, 
+                                    authType, protocol, result);
     }
 }
