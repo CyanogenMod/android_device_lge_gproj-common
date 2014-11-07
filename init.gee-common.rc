@@ -333,11 +333,10 @@ on property:persist.radio.kickstart=on
 service netmgrd /system/bin/netmgrd
     class main
 
-
 service sensors /system/bin/sensors.qcom
     class late_start
     user root
-    group root
+    group root radio system
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
     class main
@@ -371,8 +370,10 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
 
-service charger /charger
+service charger /sbin/healthd
     class charger
+    critical
+    seclabel u:r:healthd:s0
 
 # virtual sdcard daemon running as media_rw (1023)
 service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
