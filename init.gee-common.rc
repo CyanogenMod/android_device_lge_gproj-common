@@ -50,6 +50,10 @@ on init
     mkdir /sns 0775 system system
     mkdir /sns/cal 0771 system system
 
+on charger-fs
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system  /system ro barrier=1
+    start rmt_storage
+
 on fs
     setprop ro.crypto.fuse_sdcard true
     write /sys/kernel/boot_adsp/boot 1
@@ -271,6 +275,7 @@ on post-fs-data
     restorecon /sys/devices/platform/kcal_ctrl.0/kcal_ctrl
 
 on charger
+    trigger charger-fs
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/rpm_resources/enable_low_power/L2_cache 1
     write /sys/module/rpm_resources/enable_low_power/pxo 1
@@ -370,7 +375,7 @@ on property:ro.data.large_tcp_window_size=true
     # Adjust socket buffer to enlarge TCP receive window for high bandwidth (e.g. DO-RevB)
     write /proc/sys/net/ipv4/tcp_adv_win_scale 2
 
-service charger /sbin/healthd
+service charger /sbin/healthd -c
     class charger
     critical
     seclabel u:r:healthd:s0
