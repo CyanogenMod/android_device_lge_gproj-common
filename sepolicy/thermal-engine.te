@@ -1,0 +1,8 @@
+allow thermal-engine self:process execmem;
+
+# CPU hotplug uevent
+allow thermal-engine self:netlink_kobject_uevent_socket { create setopt bind read };
+allow thermal-engine self:capability net_admin;
+
+# Clock control
+allow thermal-engine sysfs_devices_system_cpu:file rw_file_perms;

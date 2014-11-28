@@ -1,0 +1,13 @@
+allow mdm_helper self:capability dac_override;
+
+# Run dd from toolbox on firmware files
+allow mdm_helper shell_exec:file { getattr rx_file_perms entrypoint };
+
+allow mdm_helper property_socket:sock_file write;
+allow mdm_helper radio_prop:property_service set;
+allow mdm_helper init:unix_stream_socket { connectto read write };
+
+allow mdm_helper self:process execmem;
+
+allow mdm_helper efs_boot_dev:blk_file { getattr rw_file_perms };
+allow mdm_helper modem_efs_partition_device:blk_file { getattr rw_file_perms };

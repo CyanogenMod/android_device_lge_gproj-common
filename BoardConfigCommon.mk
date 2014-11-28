@@ -100,3 +100,12 @@ BOARD_HARDWARE_CLASS := device/lge/gproj-common/cmhw/
 
 TARGET_USES_LOGD := false
 BOARD_USES_LEGACY_MMAP := true
+
+# SELinux policies
+# qcom sepolicy
+include device/qcom/sepolicy/sepolicy.mk
+
+# Common gproj policies
+BOARD_SEPOLICY_DIRS += \
+        device/lge/gproj-common/sepolicy
+

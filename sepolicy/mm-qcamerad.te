@@ -1,0 +1,17 @@
+type camera_prop, property_type;
+
+type_transition mm-qcamerad system_data_file:sock_file camera_socket "cam_socket0";
+
+allow mm-qcamerad system_data_file:sock_file unlink;
+
+# mm-qcamera-daemon needs this. Why? Who knows!
+allow mm-qcamerad gpu_device:chr_file { open read write ioctl };
+
+allow mm-qcamerad servicemanager:binder { call transfer };
+allow mm-qcamerad system_server:binder { call transfer };
+allow system_server mm-qcamerad:binder { call transfer };
+allow servicemanager mm-qcamerad:process getattr;
+allow servicemanager mm-qcamerad:dir search;
+allow servicemanager mm-qcamerad:file rw_file_perms;
+allow mm-qcamerad system_server:unix_stream_socket { read write };
+

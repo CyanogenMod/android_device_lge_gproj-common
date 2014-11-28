@@ -1,0 +1,15 @@
+/system/bin/bridgemgrd             u:object_r:bridge_exec:s0
+
+/dev/ks_bridge                     u:object_r:ksbridgehsic_device:s0
+/dev/efs_bridge                    u:object_r:efsbridgehsic_device:s0
+
+/dev/socket/mpctl                  u:object_r:mpctl_socket:s0
+
+/data/app/sensor_ctl_socket        u:object_r:sensors_socket:s0
+
+/sns(/.*)?                         u:object_r:sensors_persist_file:s0
+
+/sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0(/.*)?      u:object_r:sysfs_devices_system_cpu:s0
+
+/dev/block/platform/msm_sdcc.1/by-name/tz  u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/msm_sdcc.1/by-name/pad u:object_r:modem_efs_partition_device:s0
