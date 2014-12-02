@@ -32,10 +32,10 @@
     <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Is the battery LED intrusive? Used to decide if there should be a disable option -->
-    <!--bool name="config_intrusiveBatteryLed">true</bool-->
+    <bool name="config_intrusiveBatteryLed">true</bool>
 
     <!-- Does the battery LED support multiple colors? Used to decide if the user can change the colors -->
-    <!--bool name="config_multiColorBatteryLed">true</bool-->
+    <bool name="config_multiColorBatteryLed">true</bool>
 
     <!-- Flag indicating whether the we should enable the automatic brightness in Settings.
          Software implementation will be used if config_hardware_auto_brightness_available is not set -->
@@ -189,6 +189,4 @@
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
     <bool name="config_speed_up_audio_on_mt_calls">true</bool>
 
-    <!-- Device has LED flashlight -->
-    <!--bool name="config_enableTorch">true</bool-->
 </resources>
