@@ -1,1 +1,4 @@
 allow netmgrd self:process execmem;
+
+# Fixes cell data
+allow netmgrd self:packet_socket create_socket_perms;
