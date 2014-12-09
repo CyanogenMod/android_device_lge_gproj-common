@@ -1,1 +1,2 @@
 allow netmgrd self:process execmem;
+allow netmgrd self:packet_socket { create bind read write };
