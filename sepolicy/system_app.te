@@ -1,7 +1,0 @@
-# for Settings' access to DisplayColorCalibration
-allow system_app kcal_sysfs:file rw_file_perms;
-allow system_app kcal_sysfs:dir { search };
-
-# for Settings' access to VibratorHW
-allow system_app vibeamp_sysfs:file rw_file_perms;
-allow system_app vibeamp_sysfs:dir { search };

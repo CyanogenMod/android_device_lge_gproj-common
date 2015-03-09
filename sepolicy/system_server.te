@@ -1,3 +1,11 @@
 allow system_server mdm_device:chr_file r_file_perms;
 
 allow system_server sensors_data_file:dir r_dir_perms;
+
+# for Settings' access to DisplayColorCalibration
+allow system_server kcal_sysfs:file rw_file_perms;
+allow system_server kcal_sysfs:dir { search };
+
+# for Settings' access to VibratorHW
+allow system_server vibeamp_sysfs:file rw_file_perms;
+allow system_server vibeamp_sysfs:dir { search };
