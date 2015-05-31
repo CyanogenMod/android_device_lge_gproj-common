@@ -1,0 +1,2 @@
+allow vold sensors_persist_file:dir getattr;
+allow vold sensors_persist_file:dir read;
