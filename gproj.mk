@@ -67,8 +67,7 @@ PRODUCT_COPY_FILES += \
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc \
-	$(LOCAL_PATH)/touch_dev.kl:system/usr/keylayout/touch_dev.kl
+	$(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
