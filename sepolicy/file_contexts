@@ -16,6 +16,5 @@
 /dev/block/platform/msm_sdcc.1/by-name/tz  u:object_r:modem_efs_partition_device:s0
 /dev/block/platform/msm_sdcc.1/by-name/pad u:object_r:modem_efs_partition_device:s0
 
-/sys/devices/virtual/graphics/fb0/rgb         u:object_r:kcal_sysfs:s0
 /sys/class/timed_output/vibrator/amp          u:object_r:vibeamp_sysfs:s0
 
