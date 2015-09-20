@@ -387,19 +387,17 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         int response[];
 
         boolean oldRil = needsOldRilFeature("signalstrength");
-        boolean noLte = false;
 
         /* TODO: Add SignalStrength class to match RIL_SignalStrength */
         response = new int[numInts];
         for (int i = 0 ; i < numInts ; i++) {
-            if ((oldRil || noLte) && i > 6 && i < 12) {
+            if (oldRil && i > 6 && i < 12) {
                 response[i] = -1;
             } else {
                 response[i] = p.readInt();
             }
             if (i == 7 && response[i] == 99) {
                 response[i] = -1;
-                noLte = true;
             }
         }
         return new SignalStrength(response[0], response[1], response[2], response[3], response[4], response[5], response[6], response[7],response[8], response[9], response[10], response[11], true);
