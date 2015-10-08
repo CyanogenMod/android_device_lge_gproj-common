@@ -668,4 +668,14 @@ public class LgeLteRIL extends RIL implements CommandsInterface {
         }
     }
 
+    @Override
+    public void setDataAllowed(boolean allowed, Message result) {
+        if (result != null) {
+            CommandException ex = new CommandException(
+                CommandException.Error.REQUEST_NOT_SUPPORTED);
+            AsyncResult.forMessage(result, null, ex);
+            result.sendToTarget();
+        }
+    }
+
 }
