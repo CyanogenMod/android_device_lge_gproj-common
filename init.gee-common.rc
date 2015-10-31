@@ -383,9 +383,11 @@ service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emul
 
 service thermald /system/bin/thermald
     class main
+    disabled
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     class main
+    disabled
 
 service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
    user system
