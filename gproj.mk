@@ -22,52 +22,38 @@
 DEVICE_PACKAGE_OVERLAYS := $(LOCAL_PATH)/overlay
 
 PRODUCT_PACKAGES += \
-    libwpa_client \
-    hostapd \
-    dhcpcd.conf \
-    wpa_supplicant \
-    wpa_supplicant.conf
-
-PRODUCT_PACKAGES += \
     charger_res_images
 
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-        LiveWallpapers \
-        LiveWallpapersPicker \
-        VisualizationWallpapers \
-        librs_jni
+PRODUCT_COPY_FILES += \
+	device/lge/gproj-common/init.gee-common.rc:root/init.gee-common.rc \
+	device/lge/gproj-common/init.gee.usb.rc:root/init.gee.usb.rc
 
 PRODUCT_COPY_FILES += \
-        $(LOCAL_PATH)/init.gee-common.rc:root/init.gee-common.rc \
-        $(LOCAL_PATH)/init.gee.usb.rc:root/init.gee.usb.rc
+	device/lge/gproj-common/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/audio_policy.conf:system/etc/audio_policy.conf
+	device/lge/gproj-common/qosmgr_rules.xml:system/etc/qosmgr_rules.xml
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/qosmgr_rules.xml:system/etc/qosmgr_rules.xml
-
-PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml \
-	$(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
+	device/lge/gproj-common/media_profiles.xml:system/etc/media_profiles.xml \
+	device/lge/gproj-common/media_codecs.xml:system/etc/media_codecs.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml
 
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/kickstart_checker.sh:system/etc/kickstart_checker.sh
+	device/lge/gproj-common/kickstart_checker.sh:system/etc/kickstart_checker.sh
 
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/hs_detect.kl:system/usr/keylayout/hs_detect.kl \
-	$(LOCAL_PATH)/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
-	$(LOCAL_PATH)/hs_detect.kcm:system/usr/keychars/hs_detect.kcm \
-	$(LOCAL_PATH)/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm
+	device/lge/gproj-common/hs_detect.kl:system/usr/keylayout/hs_detect.kl \
+	device/lge/gproj-common/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
+	device/lge/gproj-common/hs_detect.kcm:system/usr/keychars/hs_detect.kcm \
+	device/lge/gproj-common/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm
 
 # Prebuilt input device calibration files
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/touch_dev.idc:system/usr/idc/touch_dev.idc \
-	$(LOCAL_PATH)/touch_dev.kl:system/usr/keylayout/touch_dev.kl
+	device/lge/gproj-common/touch_dev.idc:system/usr/idc/touch_dev.idc \
+	device/lge/gproj-common/touch_dev.kl:system/usr/keylayout/touch_dev.kl
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -89,7 +75,7 @@ PRODUCT_COPY_FILES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/gps.conf:system/etc/gps.conf
+	device/lge/gproj-common/gps.conf:system/etc/gps.conf
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -111,36 +97,6 @@ PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.opengles.version=196608
-
-# Audio Configuration
-# FIXME: Remove persist.audio.handset.mic and persist.audio.fluence.mode
-#        while switching new audio HAL from legacy HAL
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.audio.handset.mic.type=digital \
-	persist.audio.dualmic.config=endfire \
-	persist.audio.fluence.voicecall=true \
-	persist.audio.handset.mic=dmic \
-	persist.audio.fluence.mode=endfire \
-	persist.audio.lowlatency.rec=false
-
-
-# Do not power down SIM card when modem is sent to Low Power Mode.
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.radio.apm_sim_not_pwdn=1
-
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.telephony.call_ring.multiple=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.telephony.ril_class=LgeLteRIL \
-	ro.telephony.ril.config=qcomdsds
-
-#Upto 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
 
 PRODUCT_PACKAGES += \
 	librs_jni \
@@ -167,12 +123,14 @@ PRODUCT_PACKAGES += \
 	libaudio-resampler
 
 # Voice processing
-PRODUCT_PACKAGES += libqcomvoiceprocessing
+PRODUCT_PACKAGES += \
+	libqcomvoiceprocessing
+
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/audio_effects.conf:system/vendor/etc/audio_effects.conf
+	device/lge/gproj-common/audio_effects.conf:system/vendor/etc/audio_effects.conf
 
 PRODUCT_PACKAGES += \
-        libmm-omxcore \
+	libmm-omxcore \
 	libdivxdrmdecrypt \
 	libOmxVdec \
 	libOmxVenc \
@@ -187,32 +145,11 @@ PRODUCT_PACKAGES += \
 	libgps.utils \
 	gps.msm8960
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	rild.libpath=/system/lib/libril-qc-qmi-1.so
-
 PRODUCT_PROPERTY_OVERRIDES += \
 	drm.service.enabled=true
 
-PRODUCT_PROPERTY_OVERRIDES += \
-	wifi.interface=wlan0 \
-	wifi.supplicant_scan_interval=15
-
-# Enable AAC 5.1 output
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
-
-PRODUCT_PROPERTY_OVERRIDES += \
-        debug.egl.recordable.rgba8888=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.qc.sensors.wl_dis=true \
-	ro.qualcomm.sensors.smd=true
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
-
 PRODUCT_COPY_FILES += \
-	$(LOCAL_PATH)/fetch-swv:system/bin/fetch-swv
+	device/lge/gproj-common/fetch-swv:system/bin/fetch-swv
 
 $(call inherit-product, hardware/qcom/msm8960/msm8960.mk)
 
